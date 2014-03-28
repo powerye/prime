@@ -8,7 +8,7 @@ Prime1() {
 	local temp
 
 	while ((PRIME+=2)); do
-	    [ $PRIME -gt $MAX ] && break
+		[ $PRIME -gt $MAX ] && break
 		temp=`factor $PRIME`
 		[ $PRIME -eq ${temp##* } ] && echo -ne "$PRIME "
 	done
@@ -22,21 +22,21 @@ Prime2() {
 	local i t
 	local PRIME=()
 
-    for ((i=3;i<=MAX;i+=2)); do
-        PRIME[$i]=$i
+	for ((i=3;i<=MAX;i+=2)); do
+		PRIME[$i]=$i
 	done
 
 	i=3
-    echo -n '2 '
+	echo -n '2 '
 
 	while [ $i -lt $sqMAX ]; do
-	    until [ -n "${PRIME[$i]}" ]
-		do	((i+=2))
+		until [ -n "${PRIME[$i]}" ]; do
+			((i+=2))
 		done
 		echo -n "${PRIME[$i]} "
 
-        for ((t=i;t<=MAX;t+=2*i)); do
-            unset PRIME[$t]
+		for ((t=i;t<=MAX;t+=2*i)); do
+			unset PRIME[$t]
 		done
 	done
 
@@ -52,8 +52,8 @@ Prime3() {
 
 	echo -n "2 3 "
 	for ((x=5;x<MAX;x+=2)); do
-	    for ((i=0;PRIME[i]*PRIME[i]-x<=0;i++)); do
-	        [ $[$x%${PRIME[$i]}] -eq 0 ] && continue 2
+		for ((i=0;PRIME[i]*PRIME[i]-x<=0;i++)); do
+			[ $[$x%${PRIME[$i]}] -eq 0 ] && continue 2
 		done
 		PRIME[${#PRIME[*]}]=$x
 		echo -n "$x "
